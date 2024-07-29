@@ -1,15 +1,15 @@
 #!/bin/zsh
 
 # Function to update and upgrade using dnf for Fedora/CentOS/RHEL
-update_rhel_fedora() {
-    echo "Updating and upgrading RHEL/Fedora system using dnf..."
+update_dnf() {
+    echo "Updating and upgrading..."
     sudo dnf update -y
     sudo dnf upgrade -y
 }
 
 # Function to update and upgrade using apt for Ubuntu/Kali/Debian
-update_ubuntu() {
-    echo "Updating and upgrading Ubuntu system using apt..."
+update_apt() {
+    echo "Updating and upgrading..."
     sudo apt update -y
     sudo apt upgrade -y
 }
@@ -27,6 +27,7 @@ update_homebrew() {
             echo "Homebrew is already up to date."
         else
             echo "Homebrew updated."
+            echo ""
             echo "Upgrading Homebrew packages..."
             brew upgrade
             echo ""
@@ -42,16 +43,20 @@ update_homebrew() {
 if [ "$(uname)" = "Darwin" ]; then
     # macOS
     update_homebrew
-elif [ -f /etc/redhat-release ] || [ -f /etc/fedora-release ]; then
-    # RHEL or Fedora
-    update_rhel_fedora
+elif [ -f /etc/redhat-release ] || [ -f /etc/fedora-release ] || [ -f /etc/rocky-release ]; then
+    # RHEL, Fedora, or Rocky Linux
+    update_dnf
     update_homebrew
 elif [ -f /etc/lsb-release ]; then
     # Ubuntu
-    update_ubuntu
+    update_apt
+    update_homebrew
+elif [ -f /etc/os-release ] && grep -q "ID=kali" /etc/os-release; then
+    # Kali Linux
+    update_apt 
     update_homebrew
 else
-    echo "This OS is not supported using this script."
+    echo "Unsupported operating system."
     exit 1
 fi
 

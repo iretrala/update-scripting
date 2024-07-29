@@ -11,10 +11,10 @@ If you are new to using the CLI, don't forget to do the following in order to be
 
 ### Compatibility Chart
 
-| Operating System | Tested | Result |
+| Operating System | Tested? | Result |
 | ----- | ----- | ----- |
 | macOS | yes | ✅ |
-| Ubuntu | not yet | n/a |
+| Fedora | yes | ✅ |
+| Ubuntu | yes | ✅ |
 | Kali | not yet | n/a |
-| Fedora | not yet | n/a |
 | RHEL | not yet | n/a |
