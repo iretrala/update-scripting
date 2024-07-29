@@ -16,20 +16,23 @@ update_ubuntu() {
 
 # Function to update and upgrade using Homebrew for macOS (or Linux if installed)
 update_homebrew() {
-    echo "Updating and upgrading using Homebrew..."
-
     # Check if Homebrew is installed
+    echo "Checking if Homebrew is installed..."
+    echo ""
     if command -v brew &> /dev/null; then
         echo "Homebrew is installed."
         echo ""
-        echo "Updating Homebrew..."
-        brew update
-        echo ""
-        echo "Upgrading packages managed by Homebrew"
-        brew upgrade
-        echo ""
-        echo "Cleaning up packages managed by Homebrew"
-        brew cleanup
+        if brew update | grep -q "Already up-to-date"; then
+            echo ""
+            echo "Homebrew is already up to date."
+        else
+            echo "Homebrew updated."
+            echo "Upgrading Homebrew packages..."
+            brew upgrade
+            echo ""
+            echo "Tidying up Homebrew packages..."
+            brew cleanup
+        fi
     else
         echo "Homebrew is not installed. Skipping Homebrew updates."
     fi
@@ -52,4 +55,5 @@ else
     exit 1
 fi
 
-echo "System updates and upgrades completed."
+echo ""
+echo "Updates and upgrades completed."

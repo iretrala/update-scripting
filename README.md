@@ -13,7 +13,7 @@ If you are new to using the CLI, don't forget to do the following in order to be
 
 | Operating System | Tested | Result |
 | ----- | ----- | ----- |
-| macOS | not yet | n/a |
+| macOS | yes | ✅ |
 | Ubuntu | not yet | n/a |
 | Kali | not yet | n/a |
 | Fedora | not yet | n/a |
